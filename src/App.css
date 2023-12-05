@@ -1,0 +1,10 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&family=Montserrat:wght@700&display=swap");
+
+.App {
+  min-height: 100vh;
+  display: flex;
+  background: black;
+  /* background-image: url(); */
+  /* background-size: cover; */
+  /* background-position: center; */
+}
