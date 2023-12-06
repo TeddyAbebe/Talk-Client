@@ -3,8 +3,6 @@
 .App {
   min-height: 100vh;
   display: flex;
-  background: black;
-  /* background-image: url(); */
-  /* background-size: cover; */
-  /* background-position: center; */
+  background-image: url(./Assets/concrete-surface-with-chat-bubble.jpg);
+  background-size: contain;
 }

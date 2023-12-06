@@ -18,34 +18,41 @@ const HomePage = () => {
       <Box
         d="flex"
         textAlign="center"
-        p={3}
-        bg={"white"}
+        bg={"#171B33"}
         w="100%"
-        m="40px 0 15px 0"
+        m="15px 0 15px 0"
         borderRadius="lg"
         borderWidth="1px"
       >
-        <Text fontSize="4xl" fontFamily="DM-Sans" color="black">
+        <Text fontSize="4xl" fontFamily="DM-Sans" color="white">
           Talk
         </Text>
       </Box>
 
       <Box
-        bg={"white"}
+        bg={"#171B33"}
         w={"100%"}
-        p={4}
-        color="black"
+        p={2}
+        color="white"
         borderRadius="lg"
         borderWidth="1px"
       >
         <Tabs variant="soft-rounded">
-          <TabList mb="1em">
-            <Tab width="50%">Login</Tab>
-            <Tab width="50%">Sign Up</Tab>
+          <TabList>
+            <Tab width="50%" color="white">
+              Login
+            </Tab>
+            <Tab width="50%" color="white">
+              Sign Up
+            </Tab>
           </TabList>
           <TabPanels>
-            <TabPanel><Login /></TabPanel>
-            <TabPanel><SignUp /></TabPanel>
+            <TabPanel>
+              <Login />
+            </TabPanel>
+            <TabPanel>
+              <SignUp />
+            </TabPanel>
           </TabPanels>
         </Tabs>
       </Box>
