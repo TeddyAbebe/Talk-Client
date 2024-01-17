@@ -56,18 +56,21 @@ const Login = () => {
 
       toast({
         title: "Login Successful.",
-        status: "Success",
+        status: "success",
         duration: 5000,
         isClosable: true,
         position: "top",
       });
 
-      localStorage.setItem("userInfo", JSON.stringify(data));
+      const userInfo = JSON.stringify(data);
+
+      localStorage.setItem("userInfo", userInfo);
 
       setLoading(false);
 
       navigate("/chats");
     } catch (error) {
+      console.log(error);
       toast({
         title: "Error Occurred!",
         description: error.response.data.message,
