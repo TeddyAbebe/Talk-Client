@@ -28,7 +28,8 @@ import ProfileModal from "./ProfileModal";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import ChatLoading from "../ChatLoading/ChatLoading";
-import UserListItem from "../UserAvatar/UserListItem";
+import UserListItem from "../Users/UserListItem";
+import { FaSearch } from "react-icons/fa";
 
 const SideDrawer = () => {
   const [search, setSearch] = useState("");
@@ -123,68 +124,93 @@ const SideDrawer = () => {
 
   return (
     <>
-      <Box
-        display="flex"
-        justifyContent="space-between"
-        alignItems="center"
-        bg="#fff"
-        w="100%"
-        p="5px 10px 5px 10px"
-        borderWidth="5px"
-      >
-        <Tooltip label="Search Users" hasArrow placement="left">
-          <Button variant="ghost" onClick={onOpen}>
-            <TbUserSearch />
-            <Text display={{ base: "none", md: "flex" }} px="2">
-              Search Users
-            </Text>
-          </Button>
-        </Tooltip>
+      <Box display="flex" justifyContent="center" alignItems="center" w="100%">
+        <Box
+          display="flex"
+          justifyContent="space-between"
+          alignItems="center"
+          bg="#fff"
+          w="90%"
+          p="5px 10px 5px 10px"
+          borderRadius={"lg"}
+        >
+          <Tooltip label="Search Users" hasArrow placement="left">
+            <Button
+              size={"sm"}
+              variant="outline"
+              colorScheme="facebook"
+              onClick={onOpen}
+            >
+              <TbUserSearch />
+              <Text display={{ base: "none", md: "flex" }} px="2">
+                Search Users
+              </Text>
+            </Button>
+          </Tooltip>
 
-        <Text fontSize="2xl" fontFamily="Work sans" fontWeight="bold">
-          Talk
-        </Text>
+          <Text fontSize="2xl" fontFamily="Work sans" fontWeight="bold">
+            Talk
+          </Text>
 
-        <div>
-          <Menu>
-            <MenuButton p={1}>
-              <BellIcon fontSize="2xl" m={1} />
-            </MenuButton>
-            {/* <MenuList></MenuList> */}
-          </Menu>
-          <Menu>
-            <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
-              <Avatar
-                size="sm"
-                cursor="pointer"
-                name={user.name}
-                src={user.pic}
-              />
-            </MenuButton>
+          <div>
+            <Menu>
+              <MenuButton p={1}>
+                <BellIcon fontSize="2xl" m={1} />
+              </MenuButton>
+              {/* <MenuList></MenuList> */}
+            </Menu>
+            <Menu>
+              <MenuButton
+                as={Button}
+                rightIcon={<ChevronDownIcon />}
+                colorScheme="facebook"
+              >
+                <Avatar
+                  size="sm"
+                  cursor="pointer"
+                  name={user.name}
+                  src={user.pic}
+                />
+              </MenuButton>
 
-            <MenuList>
-              <ProfileModal user={user}>
-                <MenuItem>My Profile</MenuItem>
-              </ProfileModal>
-              <MenuDivider />
-              <MenuItem onClick={logOutHandler}>Logout</MenuItem>
-            </MenuList>
-          </Menu>
-        </div>
+              <MenuList>
+                <ProfileModal user={user}>
+                  <MenuItem>My Profile</MenuItem>
+                </ProfileModal>
+                <MenuDivider />
+                <MenuItem onClick={logOutHandler}>Logout</MenuItem>
+              </MenuList>
+            </Menu>
+          </div>
+        </Box>
       </Box>
-      <Drawer placement="left" onClose={onClose} isOpen={isOpen}>
+
+      <Drawer
+        placement="left"
+        onClose={onClose}
+        isOpen={isOpen}
+        isFullHeight="false"
+        colorScheme={"whatsapp"}
+      >
         <DrawerOverlay />
         <DrawerContent>
-          <DrawerHeader borderBottomWidth={"1px"}>Search Users</DrawerHeader>
+          <DrawerHeader textAlign={"center"} borderBottomWidth={"1px"}>
+            Search Users
+          </DrawerHeader>
           <DrawerBody>
-            <Box display={"flex"} pb={2}>
+            <Box display={"flex"} alignItems={"center"} pb={2}>
               <Input
                 placeholder="Search by Name or Email"
+                _placeholder={{ color: "#314E89" }}
                 mr={2}
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
+                colorScheme="facebook"
+                variant="filled"
               />
-              <Button onClick={handleSearch}>GO</Button>
+              <Button size={"sm"} colorScheme="facebook" onClick={handleSearch}>
+                <FaSearch />
+              </Button>
             </Box>
 
             {loading ? (
@@ -199,7 +225,22 @@ const SideDrawer = () => {
               ))
             )}
 
-            {loadingChat && <Spinner ml="auto" display="flex" />}
+            {loadingChat && (
+              <Box
+                display="flex"
+                justifyContent={"center"}
+                alignItems={"center"}
+              >
+                <Spinner
+                  size={"lg"}
+                  my={5}
+                  color="#314E89"
+                  thickness="4px"
+                  speed="0.65s"
+                  emptyColor="gray.200"
+                />
+              </Box>
+            )}
           </DrawerBody>
         </DrawerContent>
       </Drawer>

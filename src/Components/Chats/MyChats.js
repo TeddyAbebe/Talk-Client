@@ -5,8 +5,10 @@ import { AddIcon } from "@chakra-ui/icons";
 import ChatLoading from "../ChatLoading/ChatLoading";
 import { getSender } from "../../Config/ChatLogics";
 import { ChatState } from "../../Context/ChatProvider";
+import GroupChatModal from "../Miscellaneous/GroupChatModal";
+import { FaUsers, FaUser } from "react-icons/fa";
 
-const MyChats = () => {
+const MyChats = ({ fetchAgain }) => {
   const [loggedUser, setLoggedUser] = useState();
   const { user, selectedChat, setSelectedChat, chats, setChats } = ChatState();
 
@@ -42,7 +44,7 @@ const MyChats = () => {
   useEffect(() => {
     setLoggedUser(JSON.parse(localStorage.getItem("userInfo")));
     fetchChats();
-  }, []);
+  }, [fetchAgain]);
 
   return (
     <Box
@@ -66,13 +68,16 @@ const MyChats = () => {
         alignItems={"center"}
       >
         My Chats
-        <Button
-          display={"flex"}
-          fontSize={{ base: "15px", md: "10px", lg: "15px" }}
-          rightIcon={<AddIcon />}
-        >
-          New Group Chat
-        </Button>
+        <GroupChatModal>
+          <Button
+            display={"flex"}
+            fontSize={{ base: "15px", md: "10px", lg: "15px" }}
+            rightIcon={<AddIcon />}
+            colorScheme="facebook"
+          >
+            New Group Chat
+          </Button>
+        </GroupChatModal>
       </Box>
 
       <Box
@@ -91,7 +96,7 @@ const MyChats = () => {
               <Box
                 onClick={() => setSelectedChat(chat)}
                 cursor={"pointer"}
-                bg={selectedChat === chat ? "#38B2AC" : "#E8E8E8"}
+                bg={selectedChat === chat ? "#314E89" : "#E8E8E8"}
                 color={selectedChat === chat ? "white" : "black"}
                 px={3}
                 py={2}
@@ -99,9 +104,29 @@ const MyChats = () => {
                 key={chat._id}
               >
                 <Text>
-                  {!chat.isGroupChat
-                    ? getSender(loggedUser, chat.users)
-                    : chat.chatName}
+                  {!chat.isGroupChat ? (
+                    <Box
+                      display={"flex"}
+                      alignItems={"center"}
+                      gap={"10px"}
+                      fontFamily={"Work sans"}
+                      fontWeight={"bold"}
+                    >
+                      <FaUser />
+                      {getSender(loggedUser, chat.users)}
+                    </Box>
+                  ) : (
+                    <Box
+                      display={"flex"}
+                      alignItems={"center"}
+                      gap={"10px"}
+                      fontFamily={"Work sans"}
+                      fontWeight={"bold"}
+                    >
+                      <FaUsers />
+                      {chat.chatName}
+                    </Box>
+                  )}
                 </Text>
               </Box>
             ))}

@@ -8,7 +8,7 @@ const UserListItem = ({ user, handleFunction }) => {
       cursor="pointer"
       bg="#E8E8E8"
       _hover={{
-        background: "#38B2AC",
+        background: "#314E89",
         color: "white",
       }}
       w="100%"
@@ -27,6 +27,7 @@ const UserListItem = ({ user, handleFunction }) => {
         name={user.name}
         src={user.pic}
       />
+
       <Box>
         <Text>{user.name}</Text>
         <Text fontSize={"xs"}>

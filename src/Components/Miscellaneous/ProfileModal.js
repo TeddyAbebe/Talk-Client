@@ -1,6 +1,5 @@
 import { ViewIcon } from "@chakra-ui/icons";
 import {
-  Button,
   IconButton,
   Image,
   Modal,
@@ -14,9 +13,11 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import React from "react";
+import { capitalizeFirstLetter } from "../../Config/ChatLogics";
 
 const ProfileModal = ({ user, children }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+
   return (
     <>
       {children ? (
@@ -28,16 +29,16 @@ const ProfileModal = ({ user, children }) => {
           onClick={onOpen}
         />
       )}
-      <Modal isOpen={isOpen} onClose={onClose} size="lg">
+      <Modal isOpen={isOpen} onClose={onClose} size="sm">
         <ModalOverlay />
-        <ModalContent h={"410px"}>
+        <ModalContent h={"400px"}>
           <ModalHeader
-            fontSize="40px"
+            fontSize="30px"
             fontFamily="Work sans"
             display="flex"
             justifyContent="center"
           >
-            {user.name}
+            {capitalizeFirstLetter(user.name)}
           </ModalHeader>
           <ModalCloseButton />
           <ModalBody
@@ -53,18 +54,17 @@ const ProfileModal = ({ user, children }) => {
               alt={user.name}
             />
             <Text
-              fontSize={{ base: "28px", md: "30px" }}
-              fontFamily="Work sans"
+              fontSize={{ base: "20px", md: "25px" }}
+              fontFamily="Work serif"
             >
-              Email : {user.email}
+              <b>
+                <i>Email</i>
+              </b>
+              : {user.email}
             </Text>
           </ModalBody>
 
-          <ModalFooter>
-            <Button colorScheme="blue" mr={3} onClick={onClose}>
-              Close
-            </Button>
-          </ModalFooter>
+          <ModalFooter></ModalFooter>
         </ModalContent>
       </Modal>
     </>
