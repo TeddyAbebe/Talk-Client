@@ -3,7 +3,7 @@ export const capitalizeFirstLetter = (string) => {
 };
 
 export const getSender = (loggedUser, users) => {
-  return users[0]._id === loggedUser._id
+  return users[0]?._id === loggedUser?._id
     ? capitalizeFirstLetter(users[1].name)
     : users[0].name;
 };
