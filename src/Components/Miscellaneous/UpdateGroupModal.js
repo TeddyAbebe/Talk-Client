@@ -23,7 +23,7 @@ import UserBadgeItem from "../Users/UserBadgeItem";
 import axios from "axios";
 import UserListItem from "../Users/UserListItem";
 
-const UpdateGroupModal = ({ fetchAgain, setFetchAgain }) => {
+const UpdateGroupModal = ({ fetchAgain, setFetchAgain, fetchMessages }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { selectedChat, setSelectedChat, user } = ChatState();
   const toast = useToast();
@@ -216,6 +216,8 @@ const UpdateGroupModal = ({ fetchAgain, setFetchAgain }) => {
       userToRemove._id === user._id ? setSelectedChat() : setSelectedChat(data);
 
       setFetchAgain(!fetchAgain);
+
+      fetchMessages();
 
       toast({
         title: `You removed ${capitalizeFirstLetter(

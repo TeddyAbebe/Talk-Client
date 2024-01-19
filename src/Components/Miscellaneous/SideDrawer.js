@@ -235,7 +235,7 @@ const SideDrawer = () => {
                   size={"lg"}
                   my={5}
                   color="#314E89"
-                  thickness="4px"
+                  thickness="5px"
                   speed="0.65s"
                   emptyColor="gray.200"
                 />
