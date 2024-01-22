@@ -21,7 +21,7 @@ import Lottie from "react-lottie";
 import typingAnima from "../../Animations/typing.json";
 import chatAnima from "../../Animations/loading.json";
 
-const ENDPOINT = "http://localhost:5000";
+const ENDPOINT = "https://talk-server-inm8.onrender.com";
 var socket, selectedChatCompare;
 
 const SingleChat = ({ fetchAgain, setFetchAgain }) => {
@@ -67,7 +67,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
       setLoading(true);
 
       const { data } = await axios.get(
-        `http://localhost:5000/api/message/${selectedChat._id}`,
+        `https://talk-server-inm8.onrender.com/api/message/${selectedChat._id}`,
         config
       );
 
@@ -133,7 +133,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
         setNewMessage("");
 
         const { data } = await axios.post(
-          "http://localhost:5000/api/message",
+          "https://talk-server-inm8.onrender.com/api/message",
           {
             content: newMessage,
             chatId: selectedChat._id,

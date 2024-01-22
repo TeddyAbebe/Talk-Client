@@ -46,7 +46,7 @@ const UpdateGroupModal = ({ fetchAgain, setFetchAgain, fetchMessages }) => {
       };
 
       const { data } = await axios.put(
-        "http://localhost:5000/api/chat/rename",
+        "https://talk-server-inm8.onrender.com/api/chat/rename",
         {
           chatId: selectedChat._id,
           chatName: groupChatName,
@@ -93,7 +93,7 @@ const UpdateGroupModal = ({ fetchAgain, setFetchAgain, fetchMessages }) => {
       };
 
       const { data } = await axios.get(
-        `http://localhost:5000/api/user?search=${search}`,
+        `https://talk-server-inm8.onrender.com/api/user?search=${search}`,
         config
       );
 
@@ -144,7 +144,7 @@ const UpdateGroupModal = ({ fetchAgain, setFetchAgain, fetchMessages }) => {
       };
 
       const { data } = await axios.put(
-        "http://localhost:5000/api/chat/add-to-group",
+        "https://talk-server-inm8.onrender.com/api/chat/add-to-group",
         {
           chatId: selectedChat._id,
           userId: userToAdd._id,
@@ -205,7 +205,7 @@ const UpdateGroupModal = ({ fetchAgain, setFetchAgain, fetchMessages }) => {
       };
 
       const { data } = await axios.put(
-        "http://localhost:5000/api/chat/remove-from-group",
+        "https://talk-server-inm8.onrender.com/api/chat/remove-from-group",
         {
           chatId: selectedChat._id,
           userId: userToRemove._id,
