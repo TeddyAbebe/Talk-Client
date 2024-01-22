@@ -2,12 +2,10 @@ import React, { useEffect, useState } from "react";
 import { ChatState } from "../../Context/ChatProvider";
 import {
   Box,
-  Center,
   Flex,
   FormControl,
   IconButton,
   Input,
-  Spinner,
   Text,
   useToast,
 } from "@chakra-ui/react";
@@ -27,7 +25,8 @@ const ENDPOINT = "http://localhost:5000";
 var socket, selectedChatCompare;
 
 const SingleChat = ({ fetchAgain, setFetchAgain }) => {
-  const { user, selectedChat, setSelectedChat } = ChatState();
+  const { user, selectedChat, setSelectedChat, notification, setNotification } =
+    ChatState();
   const toast = useToast();
 
   const [messages, setMessages] = useState([]);
@@ -110,7 +109,10 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
         !selectedChatCompare ||
         selectedChatCompare._id !== newMessageReceived.chat._id
       ) {
-        // give notification
+        if (!notification.includes(newMessageReceived)) {
+          setNotification([newMessageReceived, ...notification]);
+          setFetchAgain(!fetchAgain);
+        }
       } else {
         setMessages([...messages, newMessageReceived]);
       }
