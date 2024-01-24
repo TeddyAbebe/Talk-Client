@@ -79,6 +79,7 @@ const SideDrawer = () => {
 
       const { data } = await axios.get(
         `https://talk-server-inm8.onrender.com/api/user?search=${search}`,
+
         config
       );
 
