@@ -35,7 +35,7 @@ const HomePage = () => {
         borderWidth="1px"
       >
         <Text fontSize="4xl" fontFamily="DM-Sans" color="white">
-          Talk
+          Chit Chat
         </Text>
       </Box>
 

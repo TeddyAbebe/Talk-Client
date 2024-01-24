@@ -160,7 +160,7 @@ const SideDrawer = () => {
           </Tooltip>
 
           <Text fontSize="2xl" fontFamily="Work sans" fontWeight="bold">
-            Talk
+            Chit Chat
           </Text>
 
           <div>
