@@ -10,12 +10,14 @@ import { FaUsers, FaUser } from "react-icons/fa";
 
 const MyChats = ({ fetchAgain }) => {
   const [loggedUser, setLoggedUser] = useState();
+  const [loading, setLoading] = useState(false);
   const { user, selectedChat, setSelectedChat, chats, setChats } = ChatState();
 
   const toast = useToast();
 
   const fetchChats = async () => {
     // console.log(user._id);
+    setLoading(true);
     try {
       const config = {
         headers: {
@@ -29,6 +31,7 @@ const MyChats = ({ fetchAgain }) => {
       );
 
       setChats(data);
+      setLoading(false);
     } catch (error) {
       toast({
         title: "Error Occurred!",
@@ -91,49 +94,55 @@ const MyChats = ({ fetchAgain }) => {
         borderRadius={"lg"}
         overflowY={"hidden"}
       >
-        {chats ? (
-          <Stack overflowY={"scroll"}>
-            {chats?.map((chat) => (
-              <Box
-                onClick={() => setSelectedChat(chat)}
-                cursor={"pointer"}
-                bg={selectedChat === chat ? "#314E89" : "#E8E8E8"}
-                color={selectedChat === chat ? "white" : "black"}
-                px={3}
-                py={2}
-                borderRadius={"lg"}
-                key={chat?._id}
-              >
-                <Text>
-                  {!chat.isGroupChat ? (
-                    <Box
-                      display={"flex"}
-                      alignItems={"center"}
-                      gap={"10px"}
-                      fontFamily={"Work sans"}
-                      fontWeight={"bold"}
-                    >
-                      <FaUser />
-                      {getSender(loggedUser, chat.users)}
-                    </Box>
-                  ) : (
-                    <Box
-                      display={"flex"}
-                      alignItems={"center"}
-                      gap={"10px"}
-                      fontFamily={"Work sans"}
-                      fontWeight={"bold"}
-                    >
-                      <FaUsers />
-                      {chat.chatName}
-                    </Box>
-                  )}
-                </Text>
-              </Box>
-            ))}
-          </Stack>
+        {loading ? (
+          <ChatLoading skeletonHeight="40px" />
         ) : (
-          <ChatLoading />
+          <>
+            {chats ? (
+              <Stack overflowY={"scroll"}>
+                {chats?.map((chat) => (
+                  <Box
+                    onClick={() => setSelectedChat(chat)}
+                    cursor={"pointer"}
+                    bg={selectedChat === chat ? "#314E89" : "#E8E8E8"}
+                    color={selectedChat === chat ? "white" : "black"}
+                    px={3}
+                    py={2}
+                    borderRadius={"lg"}
+                    key={chat?._id}
+                  >
+                    <Text>
+                      {!chat.isGroupChat ? (
+                        <Box
+                          display={"flex"}
+                          alignItems={"center"}
+                          gap={"10px"}
+                          fontFamily={"Work sans"}
+                          fontWeight={"bold"}
+                        >
+                          <FaUser />
+                          {getSender(loggedUser, chat.users)}
+                        </Box>
+                      ) : (
+                        <Box
+                          display={"flex"}
+                          alignItems={"center"}
+                          gap={"10px"}
+                          fontFamily={"Work sans"}
+                          fontWeight={"bold"}
+                        >
+                          <FaUsers />
+                          {chat.chatName}
+                        </Box>
+                      )}
+                    </Text>
+                  </Box>
+                ))}
+              </Stack>
+            ) : (
+              <></>
+            )}
+          </>
         )}
       </Box>
     </Box>

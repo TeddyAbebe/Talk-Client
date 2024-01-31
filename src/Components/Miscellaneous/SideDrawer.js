@@ -247,7 +247,7 @@ const SideDrawer = () => {
             </Box>
 
             {loading ? (
-              <ChatLoading />
+              <ChatLoading skeletonHeight="58px" />
             ) : (
               searchResult?.map((user) => (
                 <UserListItem

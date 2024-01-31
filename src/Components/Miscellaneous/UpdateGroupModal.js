@@ -231,6 +231,7 @@ const UpdateGroupModal = ({ fetchAgain, setFetchAgain, fetchMessages }) => {
 
       setLoading(false);
     } catch (error) {
+      console.error(error);
       toast({
         title: "Error Occurred !",
         status: "error",

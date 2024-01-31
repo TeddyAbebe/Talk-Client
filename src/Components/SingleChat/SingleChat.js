@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { ChatState } from "../../Context/ChatProvider";
 import {
   Box,
+  Button,
   Flex,
   FormControl,
   IconButton,
@@ -10,6 +11,7 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import { ArrowBackIcon } from "@chakra-ui/icons";
+import { IoIosSend } from "react-icons/io";
 import { getSender, getSenderProfile } from "../../Config/ChatLogics";
 import ProfileModal from "../Miscellaneous/ProfileModal";
 import UpdateGroupModal from "../Miscellaneous/UpdateGroupModal";
@@ -121,8 +123,8 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
     });
   });
 
-  const sendMessage = async (event) => {
-    if (event.key === "Enter" && newMessage) {
+  const sendMessage = async (event, source) => {
+    if ((event.key === "Enter" && source === "enter") || source === "button") {
       socket.emit("stop typing", selectedChat._id);
       try {
         const config = {
@@ -183,6 +185,10 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
     }, timerLength);
   };
 
+  const handleSendClick = () => {
+    sendMessage({ key: "Enter" }, "button");
+  };
+
   return (
     <>
       {selectedChat ? (
@@ -217,6 +223,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
                 <UpdateGroupModal
                   fetchAgain={fetchAgain}
                   setFetchAgain={setFetchAgain}
+                  fetchMessages={fetchMessages}
                 />
               </>
             )}
@@ -248,7 +255,11 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
               </div>
             )}
 
-            <FormControl onKeyDown={sendMessage} isRequired mt={3}>
+            <FormControl
+              onKeyDown={(e) => sendMessage(e, "enter")}
+              isRequired
+              mt={3}
+            >
               {isTyping ? (
                 <Lottie
                   options={defaultOptions}
@@ -260,14 +271,20 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
                 <></>
               )}
 
-              <Input
-                variant={"filled"}
-                // bg={"#E0E0E0"}
-                bg={"#fff"}
-                placeholder="Enter a message..."
-                onChange={typingHandler}
-                value={newMessage}
-              />
+              <Flex gap={3}>
+                <Input
+                  variant={"filled"}
+                  // bg={"#E0E0E0"}
+                  bg={"#fff"}
+                  placeholder="Enter a message..."
+                  onChange={typingHandler}
+                  value={newMessage}
+                />
+
+                <Button colorScheme="facebook" onClick={handleSendClick}>
+                  <IoIosSend size="1.5em" />
+                </Button>
+              </Flex>
             </FormControl>
           </Box>
         </>
